@@ -1,4 +1,4 @@
-import templateData from "./template.json";
+import templateData from "./template3.json";
 import type { Template, GateModel, ResolvedElement } from "./types";
 
 const template: Template = templateData as Template;
@@ -121,6 +121,24 @@ export function instantiate(params: Record<string, number>): GateModel {
 		at: evalExpr(d.at, ctx),
 		offset: d.offset,
 	}));
+
+	// ── ОТЛАДКА: выводим все узлы и элементы ────────────────────
+	console.log("─────────────────────────────────────");
+	console.log(`Шаблон: ${template.name}`);
+	console.log(`Параметры:`, ctx);
+	console.log("─────────────────────────────────────");
+	console.log("УЗЛЫ:");
+	for (const [name, coords] of Object.entries(resolvedNodes)) {
+		console.log(`  ${name.padEnd(6)} → X=${coords[0].toFixed(1).padStart(8)}, Y=${coords[1].toFixed(1).padStart(8)}`);
+	}
+	console.log("─────────────────────────────────────");
+	console.log("ЭЛЕМЕНТЫ:");
+	for (const el of elements) {
+		console.log(
+			`  ${el.id.padEnd(16)}` + `(${el.from[0].toFixed(0)}, ${el.from[1].toFixed(0)}) → ` + `(${el.to[0].toFixed(0)}, ${el.to[1].toFixed(0)})` + `  длина=${el.length.toFixed(0)} мм  роль=${el.role}`,
+		);
+	}
+	console.log("─────────────────────────────────────");
 
 	return {
 		name: template.name,

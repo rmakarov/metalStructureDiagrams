@@ -1,0 +1,52 @@
+{
+	"id": "swing_double_v1",
+	"name": "Распашная двустворчатая калитка",
+
+	"params": {
+		"W": { "default": 3000, "min": 1500, "max": 6000, "step": 100, "label": "Общая ширина, мм" },
+		"H": { "default": 2000, "min": 1200, "max": 3000, "step": 100, "label": "Высота, мм" }
+	},
+
+	"materials": {
+		"frame": { "kind": "tube", "w": 60, "h": 40, "t": 3, "name": "Труба 60×40×3" },
+		"inner": { "kind": "tube", "w": 40, "h": 40, "t": 2, "name": "Труба 40×40×2" },
+		"brace": { "kind": "tube", "w": 20, "h": 20, "t": 2, "name": "Труба 20×20×2" }
+	},
+
+	"nodes": {
+		"BL": [0, 0],
+		"BR": ["W", 0],
+		"TR": ["W", "H"],
+		"TL": [0, "H"],
+
+		"BM": ["W/2", 0],
+		"TM": ["W/2", "H"],
+		"MM": ["W/2", "H/2"],
+
+		"ML": [0, "H/2"],
+		"MR": ["W", "H/2"]
+	},
+
+	"elements": [
+		{ "id": "frame-bottom", "type": "line", "from": "BL", "to": "BR", "role": "frame" },
+		{ "id": "frame-right", "type": "line", "from": "BR", "to": "TR", "role": "frame" },
+		{ "id": "frame-top", "type": "line", "from": "TR", "to": "TL", "role": "frame" },
+		{ "id": "frame-left", "type": "line", "from": "TL", "to": "BL", "role": "frame" },
+
+		{ "id": "middle-post", "type": "line", "from": "BM", "to": "TM", "role": "frame" },
+
+		{ "id": "rail-mid", "type": "line", "from": "ML", "to": "MR", "role": "inner" },
+
+		{ "id": "diag-left-1", "type": "line", "from": "BL", "to": "TM", "role": "brace" },
+		{ "id": "diag-left-2", "type": "line", "from": "TL", "to": "BM", "role": "brace" },
+
+		{ "id": "diag-right-1", "type": "line", "from": "BR", "to": "TM", "role": "brace" },
+		{ "id": "diag-right-2", "type": "line", "from": "TR", "to": "BM", "role": "brace" }
+	],
+
+	"dimensions": [
+		{ "type": "h", "from": 0, "to": "W/2", "at": 0, "offset": -80 },
+		{ "type": "h", "from": "W/2", "to": "W", "at": 0, "offset": -80 },
+		{ "type": "v", "from": 0, "to": "H", "at": 0, "offset": -80 }
+	]
+}

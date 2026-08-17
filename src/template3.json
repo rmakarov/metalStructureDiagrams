@@ -1,0 +1,51 @@
+{
+	"id": "sliding_simple_v1",
+	"name": "Откатные ворота (простые)",
+
+	"params": {
+		"W": { "default": 4000, "min": 2000, "max": 8000, "step": 100, "label": "Ширина проёма, мм" },
+		"H": { "default": 2200, "min": 1500, "max": 3000, "step": 100, "label": "Высота, мм" },
+		"counterRatio": { "default": 0.4, "min": 0.3, "max": 0.5, "step": 0.05, "label": "Противовес (доля W)" }
+	},
+
+	"materials": {
+		"frame": { "kind": "tube", "w": 80, "h": 60, "t": 4, "name": "Труба 80×60×4" },
+		"inner": { "kind": "tube", "w": 60, "h": 40, "t": 3, "name": "Труба 60×40×3" },
+		"brace": { "kind": "tube", "w": 40, "h": 40, "t": 3, "name": "Труба 40×40×3" }
+	},
+
+	"nodes": {
+		"BL": [0, 0],
+		"BR": ["W", 0],
+		"TR": ["W", "H"],
+		"TL": [0, "H"],
+
+		"CBR": ["W + W*counterRatio", 0],
+		"CTR": ["W", "H"],
+
+		"ML": [0, "H/2"],
+		"MR": ["W", "H/2"],
+		"MCR": ["W + W*(counterRatio/2)", "H/2"]
+	},
+
+	"elements": [
+		{ "id": "frame-bottom", "type": "line", "from": "BL", "to": "BR", "role": "frame" },
+		{ "id": "frame-right", "type": "line", "from": "BR", "to": "TR", "role": "frame" },
+		{ "id": "frame-top", "type": "line", "from": "TR", "to": "TL", "role": "frame" },
+		{ "id": "frame-left", "type": "line", "from": "TL", "to": "BL", "role": "frame" },
+
+		{ "id": "cnt-bottom", "type": "line", "from": "BR", "to": "CBR", "role": "frame" },
+		{ "id": "cnt-top", "type": "line", "from": "TR", "to": "CTR", "role": "frame" },
+		{ "id": "cnt-diag", "type": "line", "from": "CBR", "to": "CTR", "role": "frame" },
+
+		{ "id": "rail-middle", "type": "line", "from": "ML", "to": "MCR", "role": "inner" },
+
+		{ "id": "main-diagonal", "type": "line", "from": "BL", "to": "TR", "role": "brace" }
+	],
+
+	"dimensions": [
+		{ "type": "h", "from": 0, "to": "W", "at": 0, "offset": -100 },
+		{ "type": "h", "from": "W", "to": "W + W*counterRatio", "at": 0, "offset": -100 },
+		{ "type": "v", "from": 0, "to": "H", "at": 0, "offset": -100 }
+	]
+}
