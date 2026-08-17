@@ -1,0 +1,34 @@
+{
+	"id": "wicket_v1",
+	"name": "Калитка простая",
+
+	"params": {
+		"W": { "default": 1000, "min": 600, "max": 1500, "step": 50, "label": "Ширина, мм" },
+		"H": { "default": 2000, "min": 1500, "max": 2500, "step": 50, "label": "Высота, мм" }
+	},
+
+	"materials": {
+		"frame": { "kind": "tube", "w": 40, "h": 40, "t": 3, "name": "Труба 40×40×3" },
+		"inner": { "kind": "tube", "w": 20, "h": 20, "t": 2, "name": "Труба 20×20×2" }
+	},
+
+	"nodes": {
+		"BL": [0, 0],
+		"BR": ["W", 0],
+		"TR": ["W", "H"],
+		"TL": [0, "H"]
+	},
+
+	"elements": [
+		{ "id": "frame", "type": "line", "from": "BL", "to": "BR", "role": "frame" },
+		{ "id": "frame", "type": "line", "from": "BR", "to": "TR", "role": "frame" },
+		{ "id": "frame", "type": "line", "from": "TR", "to": "TL", "role": "frame" },
+		{ "id": "frame", "type": "line", "from": "TL", "to": "BL", "role": "frame" },
+		{ "id": "diagonal", "type": "line", "from": "BL", "to": "TR", "role": "inner" }
+	],
+
+	"dimensions": [
+		{ "type": "h", "from": 0, "to": "W", "at": 0, "offset": -60 },
+		{ "type": "v", "from": 0, "to": "H", "at": 0, "offset": -60 }
+	]
+}

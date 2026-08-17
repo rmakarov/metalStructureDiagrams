@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Редактор ворот</title>
+		<style>
+			body {
+				font-family: system-ui, sans-serif;
+				max-width: 1200px;
+				margin: 2rem auto;
+				padding: 0 1rem;
+			}
+			.controls {
+				display: flex;
+				gap: 1rem;
+				margin-bottom: 1rem;
+				flex-wrap: wrap;
+			}
+			.controls label {
+				display: flex;
+				flex-direction: column;
+				font-size: 13px;
+			}
+			.controls input,
+			.controls select {
+				padding: 6px 8px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			#canvas {
+				border: 1px solid #ddd;
+				background: #fff;
+			}
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-top: 1rem;
+				font-size: 14px;
+			}
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 6px 10px;
+				text-align: left;
+			}
+			th {
+				background: #f4f4f4;
+			}
+			h2 {
+				margin-top: 2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>🚪 Параметрический редактор ворот</h1>
+		<div class="controls">
+			<label
+				>Ширина проёма, мм
+				<input id="W" type="number" value="4000" step="100" min="1000" max="10000" />
+			</label>
+			<label
+				>Высота, мм
+				<input id="H" type="number" value="2200" step="100" min="1000" max="4000" />
+			</label>
+			<label
+				>Противовес (доля от W)
+				<input id="counterRatio" type="number" value="0.4" step="0.05" min="0.2" max="0.6" />
+			</label>
+			<label
+				>Обшивка
+				<select id="cladding">
+					<option value="profiled">Профлист</option>
+					<option value="wood">Доска</option>
+					<option value="none">Без обшивки</option>
+				</select>
+			</label>
+		</div>
+		<div id="canvas"></div>
+		<h2>Спецификация (BOM)</h2>
+		<div id="bom"></div>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
+</html>
