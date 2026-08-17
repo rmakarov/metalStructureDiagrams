@@ -1,5 +1,5 @@
-import templateData from "./template3.json";
-import type { Template, GateModel, ResolvedElement } from "./types";
+import templateData from "./template.json";
+import type { Template, GateModel, ResolvedElement, ResolvedCladding } from "./types";
 
 const template: Template = templateData as Template;
 
